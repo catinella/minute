@@ -43,8 +43,10 @@ static bool isRange (const char *mystring, int *tnmin, int *tnmax) {
 static bool isAll (const char *mystring) {
 	char tmp[128];
 	int  t = 0;
-	while (mystring[t] != '\0' && t < 128)
+	while (mystring[t] != '\0' && t < 128) {
 		tmp[t] = toupper(mystring[t]);
+		t++;
+	}
 	tmp[t] = '\0';
 	return((strcmp(tmp, "ALL") == 0));
 }
@@ -60,6 +62,8 @@ int main (int argc, char *argv[]) {
 	char         *tNamesList[] = {##TESTSLIST##};
 	testFunc     tFuncsList[]  = {##FUNCSLIST##}; 
 	int          testNumOpt = -1;
+	bool         helpFlag = false;
+	int          tnmin = -1, tnmax = -1;
 
 	struct option optionsPool[] = {
 		{"test",    required_argument, NULL, 0},
@@ -67,12 +71,6 @@ int main (int argc, char *argv[]) {
 		{"help",    no_argument,       NULL, 0},
 		{0, 0, 0, 0}
 	};
-
-	// Initialization
-	for (uint8_t t=0; t<numOfTets; t++) {
-		*(tNamesList[t]) = '\0';
-		tFuncsList[t]    = NULL;
-	}
 
 	while (ec == 0) {
 		ec = getopt_long (argc, argv, "", optionsPool, &option_index);
@@ -82,7 +80,6 @@ int main (int argc, char *argv[]) {
 			//
 			// File's arguments collecting
 			//
-			int tnmin = 0, tnmax = 0;
 			switch (option_index) {
 				case 0: 
 					printf("Test selection: %s\n", optarg);
@@ -103,19 +100,24 @@ int main (int argc, char *argv[]) {
 					printf("use %s --test={all|<n>|[<n>-<n>]} [--verbose]\n", argv[0]);
 					for (uint8_t t = 0; t < numOfTets; t++)
 						printf("%d - %s\n", t, tNamesList[t]);
+					helpFlag = true;
 				break;
-			}
-
-			for (uint8_t x=0; x<numOfTets; x++) {
-				if (
-					testNumOpt == (numOfTets + 1)  || // all option
-					testNumOpt == x                || // just one test option
-					(x >= tnmin && x <= tnmax)        // range option
-				) {
-					printf("\n%s\n", tNamesList[x]);
-					tFuncsList[x]();
-				}
 			}
 		}
 	}
+	
+	if (helpFlag == false) {
+		for (uint8_t x=0; x<numOfTets; x++) {
+			if (
+				testNumOpt == (numOfTets + 1)  || // all option
+				testNumOpt == x                || // just one test option
+				(x >= tnmin && x <= tnmax)        // range option
+			) {
+				printf("\n%s\n", tNamesList[x]);
+				tFuncsList[x]();
+			}
+		}
+	}
+
+	return(ec);
 }
