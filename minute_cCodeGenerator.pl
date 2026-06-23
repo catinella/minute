@@ -75,6 +75,8 @@ if (scalar(@ARGV) < 2) {
 	$err = 131;
 
 } else {
+	my $myPath = $0;
+	$myPath =~ s/\/[^\/]*//;
 
 	{
 		my $key;
@@ -165,7 +167,7 @@ if (scalar(@ARGV) < 2) {
 						print(STDERR "ERROR! I cannot write the \"$tgtfile\" file\n$!\n");
 						$err = 131;
 
-					} elsif (not open($tmplFH, "< $TEMPLATE_DIR/$template")) {
+					} elsif (not open($tmplFH, "< $myPath/$TEMPLATE_DIR/$template")) {
 						# ERROR!
 						print(STDERR "ERROR! I cannot read the \"$template\" file\n$!\n");
 						$err = 131;
