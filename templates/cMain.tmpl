@@ -1,0 +1,121 @@
+typedef void (*testFunc)();
+
+static bool isNumber (const char *mystring) {
+	bool out = true;
+	for (uint8_t t=0; t < strlen(mystring); t++) {
+		if (mystring[t] < '0' || mystring[t] > '9') {
+			out = false;
+			break;
+		}
+	}
+	return(out);
+}
+
+static bool isRange (const char *mystring, int *tnmin, int *tnmax) {
+	bool out = true;
+	if (mystring[0] != '[' || mystring[strlen(mystring)-1] != ']') 
+		// WARNING! It is not a valid range
+		out = false;
+	else {
+		char *tmp = strdup((mystring+1));
+		char *splitter = NULL;
+		tmp[strlen(tmp)-1] = '\0';
+		splitter = strchr(tmp, ',');
+		if (splitter == NULL) {
+			// WARNING! It is not a valid range
+			out = false;
+		} else {
+			*splitter = '\0';
+			if (isNumber(tmp) && isNumber((splitter+1))) {
+				*tnmin = atoi(tmp);
+				*tnmax = atoi((splitter+1));
+				if (*tnmax < *tnmin)
+					// WARNING! It is not a valid range
+					out = false;
+			} else
+				// WARNING! It is not a valid range
+				out = false;
+		}
+	}
+	return(out);
+}
+
+static bool isAll (const char *mystring) {
+	char tmp[128];
+	int  t = 0;
+	while (mystring[t] != '\0' && t < 128)
+		tmp[t] = toupper(mystring[t]);
+	tmp[t] = '\0';
+	return((strcmp(tmp, "ALL") == 0));
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+//                                                          M A I N
+//------------------------------------------------------------------------------------------------------------------------------
+
+int main (int argc, char *argv[]) {
+	int          option_index = 0;
+	int          ec = 0;
+	unsigned int numOfTets = ##TESTSNUM##;
+	char         *tNamesList[] = {##TESTSLIST##};
+	testFunc     tFuncsList[]  = {##FUNCSLIST##}; 
+	int          testNumOpt = -1;
+
+	struct option optionsPool[] = {
+		{"test",    required_argument, NULL, 0},
+		{"verbose", no_argument,       NULL, 0},
+		{"help",    no_argument,       NULL, 0},
+		{0, 0, 0, 0}
+	};
+
+	// Initialization
+	for (uint8_t t=0; t<numOfTets; t++) {
+		*(tNamesList[t]) = '\0';
+		tFuncsList[t]    = NULL;
+	}
+
+	while (ec == 0) {
+		ec = getopt_long (argc, argv, "", optionsPool, &option_index);
+
+		if (ec == 0) {
+			
+			//
+			// File's arguments collecting
+			//
+			int tnmin = 0, tnmax = 0;
+			switch (option_index) {
+				case 0: 
+					printf("Test selection: %s\n", optarg);
+					if (isNumber(optarg)) {
+						testNumOpt = atoi(optarg);
+					} else if (isRange(optarg, &tnmin, &tnmax)) {
+					
+					} else if (isAll(optarg)) {
+						testNumOpt = (numOfTets + 1);
+					}
+				break;
+
+				case 1:
+					printf("Verbose mode enabling\n");
+				break;
+
+				case 2:
+					printf("use %s --test={all|<n>|[<n>-<n>]} [--verbose]\n", argv[0]);
+					for (uint8_t t = 0; t < numOfTets; t++)
+						printf("%d - %s\n", t, tNamesList[t]);
+				break;
+			}
+
+			for (uint8_t x=0; x<numOfTets; x++) {
+				if (
+					testNumOpt == (numOfTets + 1)  || // all option
+					testNumOpt == x                || // just one test option
+					(x >= tnmin && x <= tnmax)        // range option
+				) {
+					printf("\n%s\n", tNamesList[x]);
+					tFuncsList[x]();
+				}
+			}
+		}
+	}
+}
