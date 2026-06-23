@@ -63,6 +63,7 @@ int main (int argc, char *argv[]) {
 	testFunc     tFuncsList[]  = {##FUNCSLIST##}; 
 	int          testNumOpt = -1;
 	bool         helpFlag = false;
+	bool         verboseFlag = false;
 	int          tnmin = -1, tnmax = -1;
 
 	struct option optionsPool[] = {
@@ -93,7 +94,7 @@ int main (int argc, char *argv[]) {
 				break;
 
 				case 1:
-					printf("Verbose mode enabling\n");
+					verboseFlag = true;
 				break;
 
 				case 2:
@@ -116,6 +117,10 @@ int main (int argc, char *argv[]) {
 				printf("\n%s\n", tNamesList[x]);
 				tFuncsList[x]();
 			}
+		}
+
+		if (verboseFlag) {
+			fileArgumentsDb_set("verbose", "");
 		}
 	}
 
