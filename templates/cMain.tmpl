@@ -108,6 +108,11 @@ int main (int argc, char *argv[]) {
 	}
 	
 	if (helpFlag == false) {
+
+		if (verboseFlag) {
+			fileArgumentsDb_set("verbose", "");
+		}
+
 		for (uint8_t x=0; x<numOfTets; x++) {
 			if (
 				testNumOpt == (numOfTets + 1)  || // all option
@@ -117,10 +122,6 @@ int main (int argc, char *argv[]) {
 				printf("\n%s\n", tNamesList[x]);
 				tFuncsList[x]();
 			}
-		}
-
-		if (verboseFlag) {
-			fileArgumentsDb_set("verbose", "");
 		}
 	}
 
