@@ -111,7 +111,8 @@ bool fileArgumentsDb_get (const char *arg_a, char *value) {
 	
 	pos = _findArg(arg_a);
 	if (pos < MINUTE_MAXNUMARGS) {
-		strcpy(value, internalDB[pos].value);
+		if (value != NULL)
+			strcpy(value, internalDB[pos].value);
 		out = true;
 	}
 	return(out);
