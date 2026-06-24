@@ -6,16 +6,16 @@ libFile = libMinuteC.a
 all:			$(libPath)/$(libFile) test
 
 test:			test.o
-			gcc -Wall -o $@ -L$(libPath) -lMinuteC $^
+			gcc -Wall -o $@ -L$(libPath) $^ -lMinuteC 
 
 test.o:		test.c test_main.c
 			gcc -Wall -g -c -o $@ -I. -I$(libPath)  $<
 
 test_main.c:	test.c
-			$(codeGen) --srcFilename=$<  --tgtFilename=$@ --verbose
+			$(codeGen) --srcFilename=$<  --tgtFilename=$@
 
 $(libPath)/%:
-			make --directory=$(libPath)
+			make --directory=$(libPath) GDB=1
 
 clean:
 			rm -fv *.o
