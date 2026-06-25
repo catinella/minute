@@ -22,7 +22,7 @@
 CMD="install"
 PREFIX="/usr/local"
 PRJCT_DIR="share/minute"
-TEMP_DIR="template"
+TEMP_DIR="templates"
 
 libFilesList="./src_C/libMinuteC.a ./src_CPP/libMinuteCPP.a"
 incFilesList="./src_C/minute.h ./src_CPP/minute.hpp"
