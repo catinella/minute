@@ -1,0 +1,139 @@
+typedef void (*testFunc)();
+
+static bool isNumber (const string &mystring) {
+	//
+	// Description:
+	//	It returns true value only if the argument defined string contains numbers
+	//
+	bool out = true;
+	for (uint8_t t=0; t < mystring.size(); t++) {
+		if (mystring[t] < '0' || mystring[t] > '9') {
+			out = false;
+			break;
+		}
+	}
+	return(out);
+}
+
+static bool isNumber (const char *mystring) {
+	//
+	// Description:
+	//	It a wrapper to isNumber(std::string)
+	//
+	return (isNumber(string(mystring)));
+}
+
+static bool isRange (const string &mystring, int &tnmin, int &tnmax) {
+	//
+	// Description:
+	//	It returns true value only if the argument defined string contains a numeric range ([<n0>,<n1>])
+	//
+	bool out = true;
+	if (
+		mystring[0] != '[' || mystring[mystring.size()-1] != ']' ||
+		mystring.find(',') == std::string::npos
+	) 
+		// WARNING! It is not a valid range
+		out = false;
+
+	else {
+		auto splitter = mystring.find(',');
+		string tmp = mystring.substr(1, mystring.size()-1);
+		string ra  = tmp.substr(tmp.begin, splitter);
+		string rb  = tmp.substr(splitter+1, tmp.end);
+		
+		if (isNumber(ra) && isNumber(rb)) {
+			tnmin = atoi(ra);
+			tnmax = atoi(rb);
+			if (tnmax < tnmin)
+				// WARNING! It is not a valid range
+				out = false;
+		} else
+			// WARNING! It is not a valid range
+			out = false;
+		}
+	}
+	return(out);
+}
+
+static bool isAll (string mystring) {
+	std::transform(mystring.begin(), mystring.end(), mystring.begin(), ::toupper);
+	return((mystring == "ALL"));
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+//                                                          M A I N
+//------------------------------------------------------------------------------------------------------------------------------
+
+int main (int argc, char *argv[]) {
+	int            option_index = 0;
+	int            ec           = 0;
+	unsigned int   numOfTets    = ##TESTSNUM##;
+	list<string>   tNamesList   = {##TESTSLIST##};
+	list<testFunc> tFuncsList   = {##FUNCSLIST##}; 
+	int            testNumOpt   = -1;
+	bool           helpFlag     = false;
+	bool           verboseFlag  = false;
+	int            tnmin = -1, tnmax = -1;
+
+	struct option optionsPool[] = {
+		{"test",    required_argument, NULL, 0},
+		{"verbose", no_argument,       NULL, 0},
+		{"help",    no_argument,       NULL, 0},
+		{0, 0, 0, 0}
+	};
+
+	while (ec == 0) {
+		ec = getopt_long (argc, argv, "", optionsPool, &option_index);
+
+		if (ec == 0) {
+			
+			//
+			// File's arguments collecting
+			//
+			switch (option_index) {
+				case 0: 
+					printf("Test selection: %s\n", optarg);
+					if (isNumber(optarg)) {
+						testNumOpt = atoi(optarg);
+					} else if (isRange(optarg, &tnmin, &tnmax)) {
+					
+					} else if (isAll(optarg)) {
+						testNumOpt = (numOfTets + 1);
+					}
+				break;
+
+				case 1:
+					verboseFlag = true;
+				break;
+
+				case 2:
+					printf("use %s --test={all|<n>|[<n>-<n>]} [--verbose]\n", argv[0]);
+					for (uint8_t t = 0; t < numOfTets; t++)
+						printf("%d - %s\n", t, tNamesList[t]);
+					helpFlag = true;
+				break;
+			}
+		}
+	}
+	
+	if (helpFlag == false) {
+
+		if (verboseFlag) {
+			fileArgumentsDb_set("verbose", "");
+		}
+
+		for (uint8_t x=0; x<numOfTets; x++) {
+			if (
+				testNumOpt == (numOfTets + 1)  || // all option
+				testNumOpt == x                || // just one test option
+				(x >= tnmin && x <= tnmax)        // range option
+			) {
+				printf("\n%s\n", tNamesList[x]);
+				tFuncsList[x]();
+			}
+		}
+	}
+
+	return(ec);
+}
