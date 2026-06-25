@@ -86,8 +86,10 @@ int main (int argc, char *argv[]) {
 					printf("Test selection: %s\n", optarg);
 					if (isNumber(optarg)) {
 						testNumOpt = atoi(optarg);
-					} else if (isRange(optarg, &tnmin, &tnmax)) {
 					
+					} else if (isRange(optarg, &tnmin, &tnmax)) {
+						testNumOpt = -2;
+
 					} else if (isAll(optarg)) {
 						testNumOpt = (numOfTets + 1);
 					}
@@ -98,17 +100,18 @@ int main (int argc, char *argv[]) {
 				break;
 
 				case 2:
-					printf("use %s --test={all|<n>|[<n>-<n>]} [--verbose]\n", argv[0]);
-					for (uint8_t t = 0; t < numOfTets; t++)
-						printf("%d - %s\n", t, tNamesList[t]);
 					helpFlag = true;
 				break;
 			}
 		}
 	}
 	
-	if (helpFlag == false) {
-
+	if (helpFlag || testNumOpt == -1) {
+		printf("use %s --test={all|<n>|[<n>-<n>]} [--verbose]\n", argv[0]);
+		for (uint8_t t = 0; t < numOfTets; t++)
+			printf("%d - %s\n", t, tNamesList[t]);
+	
+	} else {
 		if (verboseFlag) {
 			fileArgumentsDb_set("verbose", "");
 		}
@@ -119,7 +122,7 @@ int main (int argc, char *argv[]) {
 				testNumOpt == x                || // just one test option
 				(x >= tnmin && x <= tnmax)        // range option
 			) {
-				printf("\n%s\n", tNamesList[x]);
+				printf("\n---------- %s ----------\n", tNamesList[x]);
 				tFuncsList[x]();
 			}
 		}
