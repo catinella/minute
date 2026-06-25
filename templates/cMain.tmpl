@@ -83,7 +83,6 @@ int main (int argc, char *argv[]) {
 			//
 			switch (option_index) {
 				case 0: 
-					printf("Test selection: %s\n", optarg);
 					if (isNumber(optarg)) {
 						testNumOpt = atoi(optarg);
 					
@@ -118,9 +117,9 @@ int main (int argc, char *argv[]) {
 
 		for (uint8_t x=0; x<numOfTets; x++) {
 			if (
-				testNumOpt == (numOfTets + 1)  || // all option
-				testNumOpt == x                || // just one test option
-				(x >= tnmin && x <= tnmax)        // range option
+				testNumOpt > (int)numOfTets || // all option
+				testNumOpt == x             || // just one test option
+				(x >= tnmin && x <= tnmax)     // range option
 			) {
 				printf("\n---------- %s ----------\n", tNamesList[x]);
 				tFuncsList[x]();

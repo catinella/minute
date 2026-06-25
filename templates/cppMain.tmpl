@@ -37,10 +37,10 @@ static bool isRange (const std::string &mystring, int &tnmin, int &tnmax) {
 		out = false;
 
 	else {
-		auto splitter = mystring.find(',');
-		std::string tmp = mystring.substr(1, mystring.size()-1);
-		std::string ra  = tmp.substr(0, splitter);
-		std::string rb  = tmp.substr(splitter+1, (tmp.size()-1));
+		std::string tmp      = mystring.substr(1, mystring.size()-2);
+		size_t      splitter = tmp.find(',');
+		std::string ra       = tmp.substr(0, splitter);
+		std::string rb       = tmp.substr(splitter+1, (tmp.size()-1));
 		
 		if (isNumber(ra) && isNumber(rb)) {
 			tnmin = atoi(ra.c_str());
@@ -93,7 +93,6 @@ int main (int argc, char *argv[]) {
 			//
 			switch (option_index) {
 				case 0: 
-					std::cout << "Test selection: " << optarg << std::endl;
 					if (isNumber(optarg)) {
 						testNumOpt = atoi(optarg);
 
@@ -128,9 +127,9 @@ int main (int argc, char *argv[]) {
 
 		for (uint8_t x=0; x<numOfTets; x++) {
 			if (
-				testNumOpt > numOfTets      || // all option
-				testNumOpt == x             || // just one test option
-				(x >= tnmin && x <= tnmax)     // range option
+				testNumOpt > (int)numOfTets  || // all option
+				testNumOpt == x              || // just one test option
+				(x >= tnmin && x <= tnmax)      // range option
 			) {
 				std::cout << "\n----------" <<  tNamesList[x] << "----------" << std::endl;
 				tFuncsList[x]();
