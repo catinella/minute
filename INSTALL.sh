@@ -24,6 +24,11 @@ PREFIX="/usr/local"
 PRJCT_DIR="share/minute"
 TEMP_DIR="template"
 
+libFilesList="./src_C/libMinuteC.a ./src_CPP/libMinuteCPP.a"
+incFilesList="./src_C/minute.h ./src_CPP/minute.hpp"
+tmplFilesList="./templates/cMain.tmpl ./templates/cppMain.tmpl"
+scriptsList="./minute_cCodeGenerator.pl"
+
 cd ${0%/*}
 
 for arg in $*
@@ -47,12 +52,25 @@ done
 
 if [ "$CMD" = "install" ]; then
 	make -C "./src_C"
+	make -C "./src_CPP"
+
 	[ -d "$PREFIX/$PRJCT_DIR/$TEMP_DIR" ] || mkdir -p "$PREFIX/$PRJCT_DIR/$TEMP_DIR"
 
-	install --verbose --mode=644 --owner=root "./src_C/libMinuteC.a"       "$PREFIX/lib/libMinuteC.a"
-	install --verbose --mode=644 --owner=root "./src_C/minute.h"           "$PREFIX/include/minute.h"
-	install --verbose --mode=755 --owner=root "./minute_cCodeGenerator.pl" "$PREFIX/$PRJCT_DIR/minute_cCodeGenerator.pl"
-	install --verbose --mode=644 --owner=root "./templates/cMain.tmpl"     "$PREFIX/$PRJCT_DIR/$TEMP_DIR/cMain.tmpl"
+	for file in $libFilesList; do
+		install --verbose --mode=644 --owner=root "$file" "$PREFIX/lib/${file##*/}"
+	done
+
+	for file in $incFilesList; do
+		install --verbose --mode=644 --owner=root "$file" "$PREFIX/include/${file##*/}"
+	done
+
+	for file in $scriptsList; do
+		install --verbose --mode=755 --owner=root "$file" "$PREFIX/$PRJCT_DIR/${file##*/}"
+	done
+
+	for file in $tmplFilesList; do
+		install --verbose --mode=644 --owner=root "$file" "$PREFIX/$PRJCT_DIR/$TEMP_DIR/${file##*/}"
+	done
 
 	echo "PREFIX=\"$PREFIX\""       >  minute.log
 	echo "PRJCT_DIR=\"$PRJCT_DIR\"" >> minute.log
@@ -60,13 +78,22 @@ if [ "$CMD" = "install" ]; then
 
 elif [ "$CMD" = "uninstall" ]; then
 	source minute.log
-	rm -fv                                              \
-		"$PREFIX/lib/libMinuteC.a"                    \
-		"$PREFIX/include/minute.h"                    \
-		"$PREFIX/$PRJCT_DIR/minute_cCodeGenerator.pl" \
-		"$PREFIX/$PRJCT_DIR/$TEMP_DIR/cMain.tmpl"     \
-	&& {
-		rmdir --ignore-fail-on-non-empty "$PREFIX/$PRJCT_DIR/$TEMP_DIR"
-		rmdir --ignore-fail-on-non-empty "$PREFIX/$PRJCT_DIR"          
-	}
+	for file in $libFilesList; do
+		rm -fv "$PREFIX/lib/${file##*/}"
+	done
+	for file in $incFilesList; do
+		rm -fv "$PREFIX/include/${file##*/}"
+	done
+
+	for file in $scriptsList; do
+		rm -fv "$PREFIX/$PRJCT_DIR/${file##*/}"
+	done
+
+	for file in $tmplFilesList; do
+		rm -fv "$PREFIX/$PRJCT_DIR/$TEMP_DIR/${file##*/}"
+	done
+		
+
+	rmdir --ignore-fail-on-non-empty "$PREFIX/$PRJCT_DIR/$TEMP_DIR"
+	rmdir --ignore-fail-on-non-empty "$PREFIX/$PRJCT_DIR"          
 fi
