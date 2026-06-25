@@ -7,7 +7,7 @@
 //                                           |_|  |_|_|_| |_|      \___/      |_|\___|
 //                                                    Minimal Unit Test support
 //
-// File:      test.cpp
+// File:      cppTest.cpp
 //
 // Author:    Silvano Catinella
 //
@@ -16,7 +16,7 @@
 //
 // Editor parameters: 128 cols, ts=6
 ------------------------------------------------------------------------------------------------------------------------------*/
-#include <minute.h>
+#include <minute.hpp>
 
 TEST (myFunction1, testType1) {
 	if (fileArgumentsDb_get("verbose", NULL))
@@ -42,4 +42,4 @@ TEST (myFunction2, testType2) {
 	ASSERT_EQ(1, 1);
 }
 
-#include "./test_main.c"
+#include "./cppTest_main.cpp"

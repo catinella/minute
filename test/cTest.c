@@ -7,7 +7,7 @@
 //                                           |_|  |_|_|_| |_|      \___/      |_|\___|
 //                                                    Minimal Unit Test support
 //
-// File:      test.c
+// File:      cTest.c
 //
 // Author:    Silvano Catinella
 //
@@ -42,4 +42,4 @@ TEST (myFunction2, testType2) {
 	ASSERT_EQ(1, 1);
 }
 
-#include "./test_main.c"
+#include "./cTest_main.c"
