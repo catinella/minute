@@ -17,28 +17,29 @@
 // Editor parameters: 128 cols, ts=6
 ------------------------------------------------------------------------------------------------------------------------------*/
 #include <minute.hpp>
+#include <iostream>
 
 TEST (myFunction1, testType1) {
-	if (fileArgumentsDb_get("verbose", NULL))
-		cout << "This is a verbose log.... bla bla bla" << endl;
+	if (fileArgumentsDb_get("verbose"))
+		std::cout << "This is a verbose log.... bla bla bla" << std::endl;
 	ASSERT_EQ(1, 1);
 	ASSERT_EQ(1, 1);
 }
 TEST (myFunction1, testType2) {
-	if (fileArgumentsDb_get("verbose", NULL))
-		cout << "This is a verbose log.... bla bla bla" << endl;
+	if (fileArgumentsDb_get("verbose"))
+		std::cout << "This is a verbose log.... bla bla bla" << std::endl;
 	ASSERT_EQ(1, 1);
 	ASSERT_EQ(1, 1);
 }
 TEST (myFunction2, testType1) {
-	if (fileArgumentsDb_get("verbose", NULL))
-		cout << "This is a verbose log.... bla bla bla" << endl;
+	if (fileArgumentsDb_get("verbose"))
+		std::cout << "This is a verbose log.... bla bla bla" << std::endl;
 	ASSERT_EQ(1, 1);
 	ASSERT_EQ(1, 1);
 }
 TEST (myFunction2, testType2) {
-	if (fileArgumentsDb_get("verbose", NULL))
-		cout << "This is a verbose log.... bla bla bla" << endl;
+	if (fileArgumentsDb_get("verbose"))
+		std::cout << "This is a verbose log.... bla bla bla" << std::endl;
 	ASSERT_EQ(1, 1);
 }
 
