@@ -1,3 +1,24 @@
+#-------------------------------------------------------------------------------------------------------------------------------
+#
+#                                            __  __ _             _   _     _____    
+#                                           |  \/  (_)_ __       | | | |   |_   _|__ 
+#                                           | |\/| | | '_ \ _____| | | |_____| |/ _ \
+#                                           | |  | | | | | |_____| |_| |_____| |  __/
+#                                           |_|  |_|_|_| |_|      \___/      |_|\___|
+#                                                    Minimal Unit Test support
+#
+# File:      Makefile
+#
+# Author:    Silvano Catinella
+#
+# Description:
+#	This makefile is a useful example on how to build the code of your tests.
+#		1) before to compile the test file code, you need to generate the main() function using the 
+#		   minute_cCodeGenerator.pl script. Check for the #include<..> line in the file you want to build
+#		2) Compile your test-file code with the -I option to find the minute.{h|hpp|..} header file
+#		3) Link your testing-code to the proper minute library (eg libMinuteC, libMinuteCPP..)
+#
+#-------------------------------------------------------------------------------------------------------------------------------
 LIBDIR    := $(shell ls -d ../src_[A-Z]*)
 LIBOPTS   := $(LIBDIR:%=-L%)
 INCOPTS   := $(LIBDIR:%=-I%) 
