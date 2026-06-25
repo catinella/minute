@@ -76,7 +76,7 @@ if (scalar(@ARGV) < 2) {
 
 } else {
 	my $myPath = $0;
-	$myPath =~ s/\/[^\/]*//;
+	$myPath =~ s/\/[^\/]*$//;
 
 	{
 		my $key;
@@ -205,7 +205,7 @@ if (scalar(@ARGV) < 2) {
 						}
 						if ($myVerbose) {print("\n")};
 						close($tgtFH);
-						close(tmplFH);
+						close($tmplFH);
 					}
 				}
 			}
