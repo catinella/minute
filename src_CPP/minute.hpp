@@ -20,8 +20,8 @@
 
 #include <cstdint>
 #include <string>
-#include <list>
-
+#include <vector>
+#include <algorithm>
 #include <getopt.h>
 
 #define OKSYMB  "[\033[1;32m  OK  \e[0m]"
