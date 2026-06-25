@@ -55,12 +55,18 @@ Please, consider this easy example:
 	#include "./__main.sgc"
 
 Now you can use Makefile to automatize all needed steps
+	
+	CODEGEN   ?= /usr/local/share/minute/minute_cCodeGenerator.pl
+  	MINUTELIB ?= -L/usr/local/lib -lMinuteCPP
 
 	myTest.o:	myTest.cpp __main.sgc
 			g++ -Wall -c -o $@ $<
 
 	myTest:	myTest.o
-			g++ -Wall -o $@ $^ -L<minute-path> -lMinuteCPP
+			g++ -Wall -o $@ $^ $(MINUTELIB)
+
+	__main.sgc:	myTest.cpp
+			$(CODEGEN) -srcFilename=$< --tgtFilename=$@
 
 ## 3.0 How to execute your unit-test with minute
 The main() function created by the code generator provides you the functionality you need to select the test (or a group of them)
@@ -74,9 +80,10 @@ their execution
 **verbose**: if you have implemented this functionality in your tests, then you can enable it using this file argument
 
 **test**: it allows tou to select which developed test you want to run. This option accepts the following syntax:
+
 - all:         it execute all available tests
 - <n>:         it runs only the test with the argument defined numeric ID
-- [<n0>,<n1>]: All tests where their ids belong to the argumenty defined range, will be executed
+- \[<n0>,<n1>\]: All tests where their ids belong to the argument defined range, will be executed
 
 ## 4.0 How to install minute software
 
