@@ -16,7 +16,7 @@
 //
 // Editor parameters: 128 cols, ts=6
 ------------------------------------------------------------------------------------------------------------------------------*/
-#include <minute.h>
+#include <minute.hpp>
 #include <string>
 #include <vector>
 
@@ -52,7 +52,7 @@ static dbIdx_t _findArg (const string &name_a) {
 //                                          P U B L I C   F U N C T I O N S
 //------------------------------------------------------------------------------------------------------------------------------
 
-bool fileArgumentsDb_set (const string arg_a, const string value) {
+bool fileArgumentsDb_set (string arg_a, string value) {
 	//
 	// Description:
 	//	This function allows you to set/update an argument's avue in the insternal static DB
@@ -80,7 +80,16 @@ bool fileArgumentsDb_set (const string arg_a, const string value) {
 	return(out);
 }
 
-bool fileArgumentsDb_get (const string &arg_a, string &value) {
+bool fileArgumentsDb_get (string arg1_a) {
+	//
+	// Description:
+	//	Useful wrapper when you are not iterested in the argument's value (eg. --vervose)
+	//
+	string tmp("");
+	return(fileArgumentsDb_get(arg1_a, tmp));
+}
+
+bool fileArgumentsDb_get (string arg_a, string &value) {
 	//
 	// Description:
 	//	This function retrive a previousely stored argument's value and copy its value in the second argument

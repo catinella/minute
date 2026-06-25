@@ -7,7 +7,7 @@
 //                                           |_|  |_|_|_| |_|      \___/      |_|\___|
 //                                                    Minimal Unit Test support
 //
-// File:      minute.h
+// File:      minute.hpp
 //
 // Author:    Silvano Catinella
 //
@@ -18,15 +18,11 @@
 ------------------------------------------------------------------------------------------------------------------------------*/
 #pragma once
 
-#include <unistd.h>
-#include <stdio.h>
-#include <stdbool.h>
-#include <stdint.h>
-#include <stdlib.h>
-#include <ctype.h>
-#include <getopt.h>
-
+#include <cstdint>
 #include <string>
+#include <list>
+
+#include <getopt.h>
 
 #define OKSYMB  "[\033[1;32m  OK  \e[0m]"
 #define ERRSYMB "[\033[1;31mERROR!\e[0m]"
@@ -47,5 +43,6 @@
 	void x##__##y() 
 
 
-bool fileArgumentsDb_set (const std::string &arg_a, const std::string &value);
-bool fileArgumentsDb_get (const std::string &arg_a, std::string &value);
+bool fileArgumentsDb_set (std::string arg_a, std::string value);
+bool fileArgumentsDb_get (std::string arg_a);
+bool fileArgumentsDb_get (std::string arg_a, std::string &value);
