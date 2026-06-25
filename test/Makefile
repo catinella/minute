@@ -17,6 +17,13 @@
 #		   minute_cCodeGenerator.pl script. Check for the #include<..> line in the file you want to build
 #		2) Compile your test-file code with the -I option to find the minute.{h|hpp|..} header file
 #		3) Link your testing-code to the proper minute library (eg libMinuteC, libMinuteCPP..)
+#	
+#	Modifing a templete:
+#		It you want to modify a template or adding a new one, consider to clean the old produced files (*main.*) before to
+#		rebuild the new ones. In fact, all files produced by the code-generator scripts do not depends by their templates
+#		and they will be not automatically re-generated.
+#		It happens because the script select the correct template considering just the file extension, and specify the
+#		template-files here would be a very bad solution. At the end you have just to type "make cleanall"
 #
 #-------------------------------------------------------------------------------------------------------------------------------
 LIBDIR    := $(shell ls -d ../src_[A-Z]*)
