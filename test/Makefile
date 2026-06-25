@@ -30,7 +30,7 @@ cppLibFile = ../src_CPP/libMinuteCPP.a
 
 .PHONY:	all libs clean cleanall
 
-all:			libs test
+all:			libs cTest cppTest
 
 cTest:		cTest.o
 			gcc -Wall -o $@ $(LIBOPTS) $^ -lMinuteC 
