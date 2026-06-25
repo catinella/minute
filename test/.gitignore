@@ -1,2 +1,4 @@
-cTest
-cppTest
+c*Test
+*.o
+*Test_main.c
+*Test_main.cpp
