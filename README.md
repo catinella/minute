@@ -92,5 +92,5 @@ The code-generator script parses your test source file looking for the TEST() de
 functions associated to the user feined tests. At this point the script will select the proper template and will compile it
 with the data acquired in your source code to create a typical main() function with all common available arguments management.
 
-￼
+![minute diagram](./images/codeGenDiagram.png)
 
