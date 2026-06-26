@@ -1,10 +1,11 @@
 @startuml
 skinparam style strictuml
 
-user                    -r-------> "src-file"
-"src-file"                   --right--> [Code Generator Script]
+user                    --r---> "src-file"
+"src-file"              --r---> [Code Generator Script]
 [Code Generator Script] <.down.> "main.template": use
-[Code Generator Script] --right--> "main()"
-"main()"                --right--> "exe-file"
-"src-file"                   --right--> "main()": "#include<..>"
+[Code Generator Script] --r---> "main.gsc"
+"main.gsc"              --r---> [ GCC ]
+"src-file"              --r---> [ GCC ] : "\n#include <main.gsc>" 
+[ GCC ]                 --r---> "exe-file"
 @enduml
