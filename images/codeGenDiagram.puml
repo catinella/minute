@@ -1,0 +1,10 @@
+@startuml
+skinparam style strictuml
+
+user                    -r-------> "src-file"
+"src-file"                   --right--> [Code Generator Script]
+[Code Generator Script] <.down.> "main.template": use
+[Code Generator Script] --right--> "main()"
+"main()"                --right--> "exe-file"
+"src-file"                   --right--> "main()": "#include<..>"
+@enduml
