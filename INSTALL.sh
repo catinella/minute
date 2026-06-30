@@ -95,5 +95,9 @@ elif [ "$CMD" = "uninstall" ]; then
 		
 
 	rmdir --ignore-fail-on-non-empty "$PREFIX/$PRJCT_DIR/$TEMP_DIR"
-	rmdir --ignore-fail-on-non-empty "$PREFIX/$PRJCT_DIR"          
+	rmdir --ignore-fail-on-non-empty "$PREFIX/$PRJCT_DIR"
+
+else
+	echo "ERROR! Please, use the following syntax: $0 [--cmd={install|uninstall}] [--prefix=<dir>]"
+	exit 131
 fi
