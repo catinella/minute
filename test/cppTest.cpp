@@ -23,7 +23,7 @@ TEST (myFunction1, testType1) {
 	if (fileArgumentsDb_get("verbose"))
 		std::cout << "This is a verbose log.... bla bla bla" << std::endl;
 	ASSERT_EQ(1, 1);
-	ASSERT_EQ(1, 1);
+	WMASSERT_EQ(1, 1, "Test API IEEC 12364646464");
 }
 TEST (myFunction1, testType2) {
 	if (fileArgumentsDb_get("verbose"))
@@ -35,12 +35,12 @@ TEST (myFunction2, testType1) {
 	if (fileArgumentsDb_get("verbose"))
 		std::cout << "This is a verbose log.... bla bla bla" << std::endl;
 	ASSERT_EQ(1, 1);
-	ASSERT_EQ(1, 1);
+	WMASSERT_EQ(1, 1, "TEST 1024C");
 }
 TEST (myFunction2, testType2) {
 	if (fileArgumentsDb_get("verbose"))
 		std::cout << "This is a verbose log.... bla bla bla" << std::endl;
-	ASSERT_EQ(1, 1);
+	WMASSERT_EQ(1, 0, "This test must faill");
 }
 
-#include "./cppTest_main.cpp"
+#include "./cppTest_main.sgc"

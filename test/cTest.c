@@ -28,13 +28,13 @@ TEST (myFunction1, testType2) {
 	if (fileArgumentsDb_get("verbose", NULL))
 		printf("This is a verbose log.... bla bla bla\n");
 	ASSERT_EQ(1, 1);
-	ASSERT_EQ(1, 1);
+	WMASSERT_EQ(1, 1, "Test 1024C");
 }
 TEST (myFunction2, testType1) {
 	if (fileArgumentsDb_get("verbose", NULL))
 		printf("This is a verbose log.... bla bla bla\n");
 	ASSERT_EQ(1, 1);
-	ASSERT_EQ(1, 1);
+	WMASSERT_EQ(1, 1, "Test 1048C");
 }
 TEST (myFunction2, testType2) {
 	if (fileArgumentsDb_get("verbose", NULL))
@@ -42,4 +42,4 @@ TEST (myFunction2, testType2) {
 	ASSERT_EQ(1, 1);
 }
 
-#include "./cTest_main.c"
+#include "./cTest_main.sgc"
