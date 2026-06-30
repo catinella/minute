@@ -36,8 +36,14 @@
 #define ASSERT_NE(x, y) printf("%s ", (x != y) ? OKSYMB : ERRSYMB); printf("%s(%d)\n", __func__, __LINE__);
 #define ASSERT_TRUE(x)  printf("%s ", (x)      ? OKSYMB : ERRSYMB); printf("%s(%d)\n", __func__, __LINE__);
 
+#define WMASSERT_EQ(x, y, ...) printf("%s ", (x == y) ? OKSYMB : ERRSYMB); printf(__VA_ARGS__);
+#define WMASSERT_NE(x, y, ...) printf("%s ", (x != y) ? OKSYMB : ERRSYMB); printf(__VA_ARGS__);
+#define WMASSERT_TRUE(x, ...)  printf("%s ", (x)      ? OKSYMB : ERRSYMB); printf(__VA_ARGS__);
+
 #define TEST(x, y)  void x##__##y() 
 
+
+char* _strdup (const char* src);
 
 bool fileArgumentsDb_set (const char *arg_a, const char *value);
 bool fileArgumentsDb_get (const char *arg_a, char *value);

@@ -18,6 +18,7 @@
 ------------------------------------------------------------------------------------------------------------------------------*/
 #pragma once
 
+#include <iostream>
 #include <cstdint>
 #include <string>
 #include <vector>
@@ -27,9 +28,23 @@
 #define OKSYMB  "[\033[1;32m  OK  \e[0m]"
 #define ERRSYMB "[\033[1;31mERROR!\e[0m]"
 
-#define ASSERT_EQ(x, y) printf("%s ", (x == y) ? OKSYMB : ERRSYMB); printf("%s(%d)\n", __func__, __LINE__);
-#define ASSERT_NE(x, y) printf("%s ", (x != y) ? OKSYMB : ERRSYMB); printf("%s(%d)\n", __func__, __LINE__);
-#define ASSERT_TRUE(x)  printf("%s ", (x)      ? OKSYMB : ERRSYMB); printf("%s(%d)\n", __func__, __LINE__);
+#define ASSERT_EQ(x, y) \
+	printf("%s ", (x == y) ? OKSYMB : ERRSYMB); std::cout << __func__ << "(" << __LINE__ << ")" << std::endl;
+
+#define ASSERT_NE(x, y) \
+	printf("%s ", (x != y) ? OKSYMB : ERRSYMB); std::cout << __func__ << "(" << __LINE__ << ")" << std::endl;
+
+#define ASSERT_TRUE(x) \
+	printf("%s ", (x)      ? OKSYMB : ERRSYMB); std::cout << __func__ << "(" << __LINE__ << ")" << std::endl;
+
+#define WMASSERT_EQ(x, y, ...) \
+	std::cout << std::string((x == y) ? OKSYMB : ERRSYMB) << std::string(" ") << __VA_ARGS__ << std::endl;
+
+#define WMASSERT_NE(x, y, ...) \
+	std::cout << std::string((x != y) ? OKSYMB : ERRSYMB) << std::string(" ") << __VA_ARGS__ << std::endl;
+
+#define WMASSERT_TRUE(x, ...) \
+	std::cout << std::string((x) ? OKSYMB : ERRSYMB) << std::string(" ") << __VA_ARGS__ << std::endl;
 
 #define TEST(x, y)  void x##__##y() 
 
