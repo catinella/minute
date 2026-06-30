@@ -32,20 +32,11 @@
 #define OKSYMB  "[\033[1;32m  OK  \e[0m]"
 #define ERRSYMB "[\033[1;31mERROR!\e[0m]"
 
-#define ASSERT_EQ(x, y) \
-	if (x == y) printf("%s", OKSYMB); else  printf("%s", ERRSYMB); \
-	printf(" %s(%d)\n", __func__, __LINE__);
+#define ASSERT_EQ(x, y) printf("%s ", (x == y) ? OKSYMB : ERRSYMB); printf("%s(%d)\n", __func__, __LINE__);
+#define ASSERT_NE(x, y) printf("%s ", (x != y) ? OKSYMB : ERRSYMB); printf("%s(%d)\n", __func__, __LINE__);
+#define ASSERT_TRUE(x)  printf("%s ", (x)      ? OKSYMB : ERRSYMB); printf("%s(%d)\n", __func__, __LINE__);
 
-#define ASSERT_NE(x, y) \
-	if (x != y) printf("%s", OKSYMB); else  printf("%s", ERRSYMB); \
-	printf(" %s(%d)\n", __func__, __LINE__);
-
-#define ASSERT_TRUE(x) \
-	if (x) printf("%s", OKSYMB); else  printf("%s", ERRSYMB); \
-	printf(" %s(%d)\n", __func__, __LINE__);
-
-#define TEST(x, y)  \
-	void x##__##y() 
+#define TEST(x, y)  void x##__##y() 
 
 
 bool fileArgumentsDb_set (const char *arg_a, const char *value);
