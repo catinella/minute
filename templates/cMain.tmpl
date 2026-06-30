@@ -17,7 +17,7 @@ static bool isRange (const char *mystring, int *tnmin, int *tnmax) {
 		// WARNING! It is not a valid range
 		out = false;
 	else {
-		char *tmp = strdup((mystring+1));
+		char *tmp = _strdup((mystring+1));
 		char *splitter = NULL;
 		tmp[strlen(tmp)-1] = '\0';
 		splitter = strchr(tmp, ',');
@@ -36,6 +36,7 @@ static bool isRange (const char *mystring, int *tnmin, int *tnmax) {
 				// WARNING! It is not a valid range
 				out = false;
 		}
+		free(tmp);
 	}
 	return(out);
 }
