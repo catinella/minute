@@ -69,3 +69,4 @@ clean:
 
 cleanall:		clean
 			@for dir in $(LIBDIR); do make --directory=$$dir cleanall; done
+			@rm -fv cppTest cTest
