@@ -43,13 +43,13 @@ cTest:		cTest.o
 			gcc -Wall -o $@ $(LIBOPTS) $^ -lMinuteC 
 
 cTest.o:		cTest.c cTest_main.c
-			gcc -Wall -g -c -o $@ -I. -I$(INCOPTS)  $<
+			gcc -Wall -g -c -o $@ -I. $(INCOPTS)  $<
 
 cppTest:		cppTest.o
 			g++ -Wall -o $@ $(LIBOPTS) $^ -lMinuteCPP
 
 cppTest.o:		cppTest.cpp cppTest_main.cpp
-			g++ -Wall -g -c -o $@ -I. -I$(INCOPTS)  $<
+			g++ -Wall -g -c -o $@ -I. $(INCOPTS)  $<
 
 cTest_main.c:	cTest.c
 			$(codeGen) --srcFilename=$<  --tgtFilename=$@
