@@ -30,6 +30,10 @@ LIBDIR    := $(shell ls -d ../src_[A-Z]*)
 LIBOPTS   := $(LIBDIR:%=-L%)
 INCOPTS   := $(LIBDIR:%=-I%) 
 
+CC        ?= gcc
+CXX       ?= g++
+CFLAGS    ?= -Wall -g
+
 codeGen    = ../minute_cCodeGenerator.pl
 
 cLibFile   = ../src_C/libMinuteC.a
@@ -40,29 +44,28 @@ cppLibFile = ../src_CPP/libMinuteCPP.a
 all:			libs cTest cppTest
 
 cTest:		cTest.o
-			gcc -Wall -o $@ $(LIBOPTS) $^ -lMinuteC 
+			$(CC) -Wall -o $@ $(LIBOPTS) $^ -lMinuteC 
 
-cTest.o:		cTest.c cTest_main.c
-			gcc -Wall -g -c -o $@ -I. $(INCOPTS)  $<
+cTest.o:		cTest.c cTest_main.sgc
+			$(CC) $(CFLAGS) -std=c99 -c -o $@ -I. $(INCOPTS)  $<
 
 cppTest:		cppTest.o
-			g++ -Wall -o $@ $(LIBOPTS) $^ -lMinuteCPP
+			$(CXX) -Wall -o $@ $^ $(LIBOPTS) -lMinuteCPP
 
-cppTest.o:		cppTest.cpp cppTest_main.cpp
-			g++ -Wall -g -c -o $@ -I. $(INCOPTS)  $<
+cppTest.o:		cppTest.cpp cppTest_main.sgc
+			$(CXX) $(CFLAGS) -c -o $@ -I. $(INCOPTS)  $<
 
-cTest_main.c:	cTest.c
+cTest_main.sgc:	cTest.c
 			$(codeGen) --srcFilename=$<  --tgtFilename=$@
 
-cppTest_main.cpp:	cppTest.cpp
+cppTest_main.sgc:	cppTest.cpp
 			$(codeGen) --srcFilename=$<  --tgtFilename=$@
 
 libs:			
 			@for dir in $(LIBDIR); do make --directory=$$dir GDB=1; done
 
 clean:
-			@rm -fv *.o
+			@rm -fv *.o *.sgc
 
 cleanall:		clean
 			@for dir in $(LIBDIR); do make --directory=$$dir cleanall; done
-			@rm -fv *Test *Test_main.*
