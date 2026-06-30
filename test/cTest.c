@@ -28,13 +28,13 @@ TEST (myFunction1, testType2) {
 	if (fileArgumentsDb_get("verbose", NULL))
 		printf("This is a verbose log.... bla bla bla\n");
 	ASSERT_EQ(1, 1);
-	WMASSERT_EQ(1, 1, "Test 1024C");
+	WMASSERT_EQ(1, 1, "Test 1024C\n");
 }
 TEST (myFunction2, testType1) {
 	if (fileArgumentsDb_get("verbose", NULL))
 		printf("This is a verbose log.... bla bla bla\n");
 	ASSERT_EQ(1, 1);
-	WMASSERT_EQ(1, 1, "Test 1048C");
+	WMASSERT_EQ(1, 0, "(line=%d) This test must fail\n", __LINE__);
 }
 TEST (myFunction2, testType2) {
 	if (fileArgumentsDb_get("verbose", NULL))

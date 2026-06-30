@@ -19,28 +19,30 @@
 #include <minute.hpp>
 #include <iostream>
 
+using namespace std;
+
 TEST (myFunction1, testType1) {
 	if (fileArgumentsDb_get("verbose"))
-		std::cout << "This is a verbose log.... bla bla bla" << std::endl;
+		cout << "This is a verbose log.... bla bla bla" << endl;
 	ASSERT_EQ(1, 1);
 	WMASSERT_EQ(1, 1, "Test API IEEC 12364646464");
 }
 TEST (myFunction1, testType2) {
 	if (fileArgumentsDb_get("verbose"))
-		std::cout << "This is a verbose log.... bla bla bla" << std::endl;
+		cout << "This is a verbose log.... bla bla bla" << endl;
 	ASSERT_EQ(1, 1);
 	ASSERT_EQ(1, 1);
 }
 TEST (myFunction2, testType1) {
 	if (fileArgumentsDb_get("verbose"))
-		std::cout << "This is a verbose log.... bla bla bla" << std::endl;
+		cout << "This is a verbose log.... bla bla bla" << endl;
 	ASSERT_EQ(1, 1);
 	WMASSERT_EQ(1, 1, "TEST 1024C");
 }
 TEST (myFunction2, testType2) {
 	if (fileArgumentsDb_get("verbose"))
-		std::cout << "This is a verbose log.... bla bla bla" << std::endl;
-	WMASSERT_EQ(1, 0, "This test must faill");
+		cout << "This is a verbose log.... bla bla bla" << endl;
+	WMASSERT_EQ(1, 0, "(line:" << __LINE__ << ") This test must fail");
 }
 
 #include "./cppTest_main.sgc"
