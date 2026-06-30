@@ -63,6 +63,13 @@ static void _initDB () {
 //                                          P U B L I C   F U N C T I O N S
 //------------------------------------------------------------------------------------------------------------------------------
 
+char* _strdup (const char* src) {
+	unsigned int size = (strlen(src)+1)*sizeof(char);
+	char *out = (char*)malloc(size);
+	memcpy(out, src, size);
+	return(out);
+}
+
 bool fileArgumentsDb_set (const char *arg_a, const char *value) {
 	//
 	// Description:
