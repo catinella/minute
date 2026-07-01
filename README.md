@@ -85,7 +85,17 @@ their execution
 - <n>:         it runs only the test with the argument defined numeric ID
 - \[<n0>,<n1>\]: All tests where their ids belong to the argument defined range, will be executed
 
+### 3.1 MINUTE's test screenshot
+The source code files in the <project-home>/test folder, are good examples of how to use this tool to write a unit-test file
+
+![minute's test](./images/screenshot_of_test.png)
+
 ## 4.0 How to install minute software
+To install and remove minute software, you can use the **INSTALL.sh** bash script, respecting the following syntax:
+
+	./INSTALL.sh [--cmd={install|uninstall}] [--prefix=<folder>]
+
+[!] The default prefix is /usr/local
 
 ## 5.0 How minute works
 The code-generator script parses your test source file looking for the TEST() definitions. Then generate a list with the
