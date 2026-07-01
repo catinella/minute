@@ -19,7 +19,7 @@
 #		3) Link your testing-code to the proper minute library (eg libMinuteC, libMinuteCPP..)
 #	
 #	Modifing a templete:
-#		It you want to modify a template or adding a new one, consider to clean the old produced files (*main.*) before to
+#		It you want to modify a template or adding a new one, consider to clean the old produced files (*main.sgc) before to
 #		rebuild the new ones. In fact, all files produced by the code-generator scripts do not depends by their templates
 #		and they will be not automatically re-generated.
 #		It happens because the script select the correct template considering just the file extension, and specify the
