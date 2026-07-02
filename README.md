@@ -81,9 +81,9 @@ their execution
 
 **test**: it allows tou to select which developed test you want to run. This option accepts the following syntax:
 
-- all:         it execute all available tests
+- all:         it executes all available tests
 - <n>:         it runs only the test with the argument defined numeric ID
-- \[<n0>,<n1>\]: All tests where their ids belong to the argument defined range, will be executed
+- \[<n0>,<n1>\]: it runs all tests where their IDs belong to the argument defined range
 
 ### 3.1 MINUTE's test screenshot
 The source code files in the <project-home>/test folder, are good examples of how to use this tool to write a unit-test file
@@ -98,9 +98,10 @@ To install and remove minute software, you can use the **INSTALL.sh** bash scrip
 [!] The default prefix is /usr/local
 
 ## 5.0 How minute works
-The code-generator script parses your test source file looking for the TEST() definitions. Then generate a list with the
-functions associated to the user feined tests. At this point the script will select the proper template and will compile it
-with the data acquired in your source code to create a typical main() function with all common available arguments management.
+The code-generator script parses your test source-file looking for the TEST() definitions. Then it generates a list with the
+functions associated to the user defined tests. When the step is finished, the script will select the proper template and will
+compile it using the previousely acquired data. Then it will create a typical main() function with all common available arguments
+management.
 
 ![minute diagram](./images/codeGenDiagram.png)
 
