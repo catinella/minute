@@ -27,7 +27,7 @@ TEMP_DIR="templates"
 libFilesList="./src_C/libMinuteC.a ./src_CPP/libMinuteCPP.a"
 incFilesList="./src_C/minute.h ./src_CPP/minute.hpp"
 tmplFilesList="./templates/cMain.tmpl ./templates/cppMain.tmpl"
-scriptsList="./minute_cCodeGenerator.pl"
+scriptsList="./minute_cCodeGenerator.py"
 
 cd ${0%/*}
 
