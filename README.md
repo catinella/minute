@@ -9,7 +9,7 @@
 | images                   | This folder contains picture used for RADME.md files  |
 | INSTALL.sh               | Tool to install and uninstall minute software         |
 | LICENSE                  | GPL 3 licence                                         |
-| minute_cCodeGenerator.pl | The script that generates the main() function         |
+| minute_cCodeGenerator.py | The script that generates the main() function         |
 | [minute.log]             | It is dinamically created by the installation process |
 | src_C                    | This dir contains the library for C language          |
 | src_CPP                  | This dir contains the library for C++ language        |
@@ -56,7 +56,7 @@ Please, consider this easy example:
 
 Now you can use Makefile to automatize all needed steps
 	
-	CODEGEN   ?= /usr/local/share/minute/minute_cCodeGenerator.pl
+	CODEGEN   ?= /usr/local/share/minute/minute_cCodeGenerator.py
   	MINUTELIB ?= -L/usr/local/lib -lMinuteCPP
 
 	myTest.o:	myTest.cpp __main.sgc
