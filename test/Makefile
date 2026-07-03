@@ -34,7 +34,7 @@ CC        ?= gcc
 CXX       ?= g++
 CFLAGS    ?= -Wall -g
 
-codeGen    = ../minute_cCodeGenerator.pl
+codeGen    = ../minute_cCodeGenerator.py
 
 cLibFile   = ../src_C/libMinuteC.a
 cppLibFile = ../src_CPP/libMinuteCPP.a
