@@ -4,17 +4,18 @@
 
 ## 1.0 Files
 
-|        Files/Dirs        |                 Description                           |
-|--------------------------|-------------------------------------------------------|
-| images                   | This folder contains picture used for RADME.md files  |
-| INSTALL.sh               | Tool to install and uninstall minute software         |
-| LICENSE                  | GPL 3 licence                                         |
-| minute_cCodeGenerator.py | The script that generates the main() function         |
-| [minute.log]             | It is dinamically created by the installation process |
-| src_C                    | This dir contains the library for C language          |
-| src_CPP                  | This dir contains the library for C++ language        |
-| templates                | It contains the templates used to generate main()     |
-| test                     | Some easy test to understand how to use minute soft.  |
+|   Files/Dirs  |                     Description                           |
+|---------------|-----------------------------------------------------------|
+| images        | This folder contains picture used by the RADME.md files   |
+| INSTALL.sh    | Tool to install and uninstall minute software             |
+| LICENSE       | GPL 3 licence                                             |
+| codeGen       | It contains the script that generates the main() function |
+| src_C         | This dir contains the library for C language              |
+| src_CPP       | This dir contains the library for C++ language            |
+| templates     | It contains the templates used to generate main()         |
+| test          | Some easy test to understand how to use minute soft.      |
+| tools         | External tools (eg.winstall)                              |
+| winstall.conf | Installation process configuration file                   |
 
 ## 2.0 Decription
 
@@ -91,17 +92,24 @@ The source code files in the <project-home>/test folder, are good examples of ho
 ![minute's test](./images/screenshot_of_test.png)
 
 ## 4.0 How to install minute software
-To install and remove minute software, you can use the **INSTALL.sh** bash script, respecting the following syntax:
+In order to avoid to create the common INSTALL script to install and remove minute software, I have created the winstall
+sub-module. It allows you to install and remove the package in easy way. The **winstall.sh** file should be located in the
+toows/winstall folder. If the folder is missing, then you have to clone the sub-module with the following command:
 
-	./INSTALL.sh [--cmd={install|uninstall}] [--prefix=<folder>]
+	git submodule update --init --recursive
+
+When you bave downloaded the sub-module, you can install mionute with the following command:
+
+	sudo ./tools/winstall/winstall.sh --cmd=install --verbose
+
+For further information on this tool, please, read the [winstall project's page](https://github.com/catinella/winstall)
 
 [!] The default prefix is /usr/local
 
 ## 5.0 How minute works
-The code-generator script parses your test source-file looking for the TEST() definitions. Then it generates a list with the
-functions associated to the user defined tests. When the step is finished, the script will select the proper template and will
-compile it using the previousely acquired data. Then it will create a typical main() function with all common available arguments
-management.
+The code-generator script parses your test source-file looking for the TEST() definitions. Then it generates the corresponding
+list of test functions and fills the appropriate template to produce the final main() implementation. The main() will provide
+all commonly available arguments to select and run your test.
 
 ![minute diagram](./images/codeGenDiagram.png)
 
