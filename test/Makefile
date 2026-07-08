@@ -34,7 +34,7 @@ CC        ?= gcc
 CXX       ?= g++
 CFLAGS    ?= -Wall -g
 
-codeGen    = ../minute_cCodeGenerator.py
+codeGen    = ../codeGen/minute_cCodeGenerator.py
 
 cLibFile   = ../src_C/libMinuteC.a
 cppLibFile = ../src_CPP/libMinuteCPP.a
@@ -56,10 +56,10 @@ cppTest.o:		cppTest.cpp cppTest_main.sgc
 			$(CXX) $(CFLAGS) -c -o $@ -I. $(INCOPTS)  $<
 
 cTest_main.sgc:	cTest.c
-			$(codeGen) --srcFilename=$<  --tgtFilename=$@
+			$(codeGen) --srcFilename=$<  --tgtFilename=$@ --templDir=../templates
 
 cppTest_main.sgc:	cppTest.cpp
-			$(codeGen) --srcFilename=$<  --tgtFilename=$@
+			$(codeGen) --srcFilename=$<  --tgtFilename=$@ --templDir=../templates
 
 libs:			
 			@for dir in $(LIBDIR); do make --directory=$$dir GDB=1; done
