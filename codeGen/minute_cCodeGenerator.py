@@ -24,7 +24,10 @@
 #			--srcFilename=<filename> \
 #			--tgtFilename=<filename> \
 #			--template=<filename>    \
-#			[--verbose] [--help]
+#			[--verbose]              \
+#			[--templDir=<path>]
+#	or
+#		minute_cCodeGenerator.pl --help
 #
 #-------------------------------------------------------------------------------------------------------------------------------+
 import sys
@@ -95,8 +98,15 @@ parser.add_argument(
 )
 parser.add_argument(
 	"--verbose",
+	required = False,
 	action = "store_true",
 	help   = "It increcmets the process' output verbosity level"
+)
+parser.add_argument(
+	"--templDir",
+	required = False,
+	action   = "store",
+	help     = "The folder that contains the template files"
 )
 
 args = parser.parse_args()
@@ -115,6 +125,9 @@ else :
 	testList = testsFileParser(args.srcFilename, args.verbose)
 	tmplFile = get_template(args.srcFilename)
 	
+	if args.templDir: 
+		TEMPLATE_DIR = args.templDir
+
 	for rec in testList :
 		tNFList = tNFList + f'"{rec}"' + ", "
 		rec = re.sub(r"::", r"__", rec)
