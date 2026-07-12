@@ -7,7 +7,6 @@
 |   Files/Dirs  |                     Description                           |
 |---------------|-----------------------------------------------------------|
 | images        | This folder contains picture used by the RADME.md files   |
-| INSTALL.sh    | Tool to install and uninstall minute software             |
 | LICENSE       | GPL 3 licence                                             |
 | codeGen       | It contains the script that generates the main() function |
 | src_C         | This dir contains the library for C language              |
@@ -87,7 +86,7 @@ their execution
 - \[<n0>,<n1>\]: it runs all tests where their IDs belong to the argument defined range
 
 ### 3.1 MINUTE's test screenshot
-The source code files in the <project-home>/test folder, are good examples of how to use this tool to write a unit-test file
+The source code files in the <project-home>**/test** folder, are good examples of how to use this tool to write a unit-test file
 
 ![minute's test](./images/screenshot_of_test.png)
 
