@@ -51,15 +51,19 @@ def testsFileParser (filename: str, verbose: bool) -> list[str] :
 	#	It parses the src-file that contain TEST macros ansd returns a list of the defined tests names
 	#
 	fh = open(filename, "r");
-	pattern = r"TEST[\t]*(.+,.t)"
+	pattern = r"TEST[ \t]*(.+,.+)"
 	tlist = []
 	if (verbose) :
 		print("\nDetected test procedures:")
 	while (row := fh.readline()) :
 		row = row.rstrip("\n")
 		if (re.match(pattern, row)):
+			# Space removing
 			row = re.sub(r"[ \t]", r"", row);
+
+			# Test name building
 			item = re.sub(r"TEST\(([^,]+),([^,]+)\).*", r"\1::\2", row);
+			
 			if (verbose) :
 				print(f"\t{item}");
 			tlist.append(item);
