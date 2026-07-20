@@ -66,7 +66,7 @@ Now you can use Makefile to automatize all needed steps
 			g++ -Wall -o $@ $^ $(MINUTELIB)
 
 	__main.sgc:	myTest.cpp
-			$(CODEGEN) -srcFilename=$< --tgtFilename=$@
+			$(CODEGEN) --srcFilename=$< --tgtFilename=$@
 
 ## 3.0 How to execute your unit-test with minute
 The main() function created by the code generator provides you the functionality you need to select the test (or a group of them)
