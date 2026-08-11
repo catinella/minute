@@ -112,3 +112,20 @@ all commonly available arguments to select and run your test.
 
 ![minute diagram](./images/codeGenDiagram.png)
 
+## 6.0 TODO
+[TODO](TODO.md)
+
+## 7.0 Changes
+[CHANGES](Changes.md)
+
+## 8.0 License
+This project is a free software; you can redistribute it and/or modify it under the terms	of the GNU General Public License
+as published by the Free Software Foundation; either version 3.0 of the License, or (at your option) any later version. 
+
+For further details please read the full [GPL MD file](LICENSE.md).
+You should find a copy of the GNU General Public License document in the root folder of the project; if not, write to the 
+
+	Free Software Foundation, Inc.,
+	59 Temple Place, Suite 330,
+	Boston, MA  02111-1307  USA
+
