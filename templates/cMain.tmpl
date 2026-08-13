@@ -20,7 +20,7 @@ static bool isRange (const char *mystring, int *tnmin, int *tnmax) {
 		char *tmp = _strdup((mystring+1));
 		char *splitter = NULL;
 		tmp[strlen(tmp)-1] = '\0';
-		splitter = strchr(tmp, ',');
+		splitter = strchr(tmp, '-');
 		if (splitter == NULL) {
 			// WARNING! It is not a valid range
 			out = false;

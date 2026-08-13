@@ -38,7 +38,7 @@ static bool isRange (const std::string &mystring, int &tnmin, int &tnmax) {
 
 	else {
 		std::string tmp      = mystring.substr(1, mystring.size()-2);
-		size_t      splitter = tmp.find(',');
+		size_t      splitter = tmp.find('-');
 		std::string ra       = tmp.substr(0, splitter);
 		std::string rb       = tmp.substr(splitter+1, (tmp.size()-1));
 		
