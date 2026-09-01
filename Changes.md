@@ -1,5 +1,8 @@
 ## Changes
 
+### 1.0.4 - August 2026
+- Wrong splitter char in range definition, fixed
+
 ### 1.0.3 - July 2026
 - Fix for code generator
 - Code generator has been rewritten (from Perl to Python)
