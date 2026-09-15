@@ -4,17 +4,19 @@
 
 ## 1.0 Files
 
-|   Files/Dirs  |                     Description                           |
-|---------------|-----------------------------------------------------------|
-| images        | This folder contains picture used by the RADME.md files   |
-| LICENSE       | GPL 3 licence                                             |
-| codeGen       | It contains the script that generates the main() function |
-| src_C         | This dir contains the library for C language              |
-| src_CPP       | This dir contains the library for C++ language            |
-| templates     | It contains the templates used to generate main()         |
-| test          | Some easy test to understand how to use minute soft.      |
-| tools         | External tools (eg.winstall)                              |
-| winstall.conf | Installation process configuration file                   |
+|     Files/Dirs   |                     Description                           |
+|------------------|-----------------------------------------------------------|
+| images           | This folder contains picture used by the RADME.md files   |
+| codeGen          | It contains the script that generates the main() function |
+| src_C            | This dir contains the library for C language              |
+| src_CPP          | This dir contains the library for C++ language            |
+| templates        | It contains the templates used to generate main()         |
+| test             | Some easy test to understand how to use minute soft.      |
+| tools            | External tools (eg.winstall)                              |
+| winstall.conf    | Installation process configuration file                   |
+| LICENSE-LGPL3.md | LGPL 3 license document                                   |
+| Changes.md       | Main changes of every released version                    |
+| TODO.md          | Features to implement in the next versions                |
 
 ## 2.0 Decription
 
