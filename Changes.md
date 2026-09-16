@@ -1,5 +1,8 @@
 ## Changes
 
+### 1.0.5 - September 2026
+- man-pages added
+
 ### 1.0.4 - August 2026
 - Wrong splitter char in range definition, fixed
 
