@@ -1,0 +1,90 @@
+.TH MINUTE 3 "September 2026" "minute.h" "Library Functions"
+
+.SH NAME
+minute.h - C unit-test support interface for Minute
+
+.SH SYNOPSIS
+.nf
+.B #include <minute.h>
+
+//
+// Macros
+//
+
+.BI "ASSERT_EQ(x, y)"
+
+.BI "ASSERT_NE(x, y)"
+
+.BI "ASSERT_TRUE(x)"
+
+.BI "WMASSERT_EQ(x, y, ...)"
+
+.BI "WMASSERT_NE(x, y, ...)"
+
+.BI "WMASSERT_TRUE(x, ...)"
+
+.BI "TEST(x, y)"
+
+//
+// Functions
+//
+
+.BI "bool fileArgumentsDb_set (const char *arg_a, const char *value);"
+
+.BI "bool fileArgumentsDb_get (const char *arg_a, char *value);"
+
+.fi
+
+.SH DESCRIPTION
+\fBMinute\fP is a tool designed to make writing unit tests an easy, fast, and clean task.
+\fBTEST\fP() macro instead of the testing function signature, and the macros to report every test's step success or failure.
+Then the minute software will do the rest, generating a test main with all common options that you expect by a unit-test.
+For further details on the code-generator and the minute overview, please read the following page:
+https://github.com/catinella/minute
+
+.SH MACROS
+
+.TP
+.B "ASSERT_EQ()"
+It prints a success symbol if the two values are numerical equal. Else an error symbol will be shown
+
+.TP
+.B "ASSERT_NE()"
+It prints a success symbol if the two values are numerical not equal. Else an error symbol will be shown
+
+.TP
+.B "ASSERT_TRUE()"
+It prints a success symbol if the logical expression is a true one. Else an error symbol will be shown
+
+.TP
+.B "WMASSERT_EQ()"
+It is equal to ASSERT_EQ(), but it prints a custom message
+
+.TP
+.B "WMASSERT_NE()"
+It is equal to ASSERT_NE(), but it prints a custom message
+
+.TP
+.B "WMASSERT_TRUE()"
+It is equal to ASSERT_TRUE(), but it prints a custom message
+
+.SH FUNCTIONS
+
+.TP
+.BI "bool fileArgumentsDb_get (const char *arg_a, char *value);"
+This function allows you to retrive the value of an optional test file's argument (eg. --verbose) or a value that has been set
+by another functions. It the argument (or key) has been defined then its value will be stored in the memory area defined by the
+second function's argument, and a true value is returned, else a false value is returned. If you need to know just if the
+"argument" has been declared, set the value to NULL address and valuate the returned code.
+
+.TP
+.B "bool fileArgumentsDb_set (const char *arg_a, const char *value);"
+This function is used only by the self-generated-main, usually. But you can call it from a unit-test when you want to propagate a
+value to the other tests. This function stores the argument name and its defined value in the module's static memory area.
+You can retrive any stored value with the fileArgumentsDb_get() function.
+
+.SH AUTHOR
+Silvano Catinella
+.MT catinella@yahoo.com
+catinella@yahoo.com
+.ME
