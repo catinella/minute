@@ -14,6 +14,8 @@
 | test             | Some easy test to understand how to use minute soft.      |
 | tools            | External tools (eg.winstall)                              |
 | winstall.conf    | Installation process configuration file                   |
+| share            | Files used for the installation process                   |
+| doc              | Manpages                                                  |
 | LICENSE-LGPL3.md | LGPL 3 license document                                   |
 | Changes.md       | Main changes of every released version                    |
 | TODO.md          | Features to implement in the next versions                |
