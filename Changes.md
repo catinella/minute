@@ -1,5 +1,8 @@
 ## Changes
 
+### 1.0.6 - September 2026
+- GNU pkg-config tool support added
+
 ### 1.0.5 - September 2026
 - man-pages added
 
